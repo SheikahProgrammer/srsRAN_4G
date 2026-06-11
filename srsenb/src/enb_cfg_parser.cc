@@ -2413,7 +2413,10 @@ int parse_sib2(std::string filename, sib_type2_s* data)
       "format_2b", &rr_cfg_common->ul_pwr_ctrl_common.delta_flist_pucch.delta_f_pucch_format2b));
 
   // Run parser with single section
-  return parser::parse_section(std::move(filename), &sib2);
+  int ret = parser::parse_section(std::move(filename), &sib2);
+  data->ext = true;
+  data->voice_service_cause_ind_r12_present = true;
+  return ret;
 }
 
 int parse_sib3(std::string filename, sib_type3_s* data)
